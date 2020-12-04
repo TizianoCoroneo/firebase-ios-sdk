@@ -152,8 +152,7 @@
  */
 - (void)uploadPackagedReportAtPath:(NSString *)path
                dataCollectionToken:(FIRCLSDataCollectionToken *)dataCollectionToken
-                          asUrgent:(BOOL)urgent
-                           isCrash:(BOOL)isCrash {
+                          asUrgent:(BOOL)urgent {
   FIRCLSDebugLog(@"Submitting report %@", urgent ? @"urgently" : @"async");
 
   if (![dataCollectionToken isValid]) {

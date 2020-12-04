@@ -96,10 +96,11 @@ NSString *const TestEndpoint = @"https://reports.crashlytics.com";
 - (void)testUploadPackagedReportWithoutDataCollectionToken {
   [self setUpForUpload];
 
-  BOOL success = [self.uploader uploadPackagedReportAtPath:[self packagePath]
-                                       dataCollectionToken:nil
-                                                  asUrgent:NO];
-  XCTAssertFalse(success);
+  [self.uploader uploadPackagedReportAtPath:[self packagePath]
+                        dataCollectionToken:nil
+                                   asUrgent:NO];
+
+  // Ensure we don't hand off an event to GDT
   XCTAssertNil(self.mockDataTransport.sendDataEvent_event);
 }
 
@@ -134,10 +135,10 @@ NSString *const TestEndpoint = @"https://reports.crashlytics.com";
 - (void)runUploadPackagedReportWithUrgency:(BOOL)urgent {
   [self setUpForUpload];
 
-  BOOL success = [self.uploader uploadPackagedReportAtPath:[self packagePath]
-                                       dataCollectionToken:FIRCLSDataCollectionToken.validToken
-                                                  asUrgent:urgent];
-  XCTAssertTrue(success);
+  [self.uploader uploadPackagedReportAtPath:[self packagePath]
+                        dataCollectionToken:FIRCLSDataCollectionToken.validToken
+                                   asUrgent:urgent];
+
   XCTAssertNotNil(self.mockDataTransport.sendDataEvent_event);
   XCTAssertEqualObjects(self.fileManager.removedItemAtPath_path, [self packagePath]);
 }
