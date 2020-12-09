@@ -72,6 +72,20 @@ let package = Package(
       name: "FirebaseMessaging",
       targets: ["FirebaseMessaging"]
     ),
+
+    // Only used to support manual integration of FirebaseMessaging, while pulling its dependencies through SPM
+    .library(
+        name: "FirebaseMessagingDependencies",
+        targets: [
+            "FirebaseCore",
+            "FirebaseInstanceID",
+            "GoogleUtilities_AppDelegateSwizzler",
+            "GoogleUtilities_Environment",
+            "GoogleUtilities_Reachability",
+            "GoogleUtilities_UserDefaults",
+        ]
+    ),
+
     .library(
       name: "FirebaseRemoteConfig",
       targets: ["FirebaseRemoteConfigTarget"]
